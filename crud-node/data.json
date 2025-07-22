@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Laptop",
+    "price": 250000
+  },
+  {
+    "id": 2,
+    "name": "Item Dua",
+    "price": 250000
+  },
+  {
+    "id": 1749388211163,
+    "name": "Item Baru",
+    "price": 250000
+  },
+  {
+    "id": 3,
+    "name": "Pensil",
+    "price": 250000
+  },
+  {
+    "id": 4,
+    "name": "Kotak makan",
+    "price": 250000
+  }
+]

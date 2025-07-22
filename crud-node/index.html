@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="product-list" id="product-list"></div>
+    <div class="cart-list" id="cart-list"></div>
+
+    <script>
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      function renderCart() {
+        const cartList = document.getElementById("cart-list");
+        cartList.innerHTML = "";
+        cart.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = `${item.name} - Rp${item.price.toLocaleString()}`;
+          cartList.appendChild(li);
+        });
+      }
+
+      function addToCart(product) {
+        cart.push(product);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+      }
+
+      fetch("http://localhost:3000/items")
+        .then((res) => res.json())
+        .then((products) => {
+          console.log(products);
+          const list = document.getElementById("product-list");
+          products.forEach((p) => {
+            const card = document.createElement("div");
+            card.className = "product-card";
+            card.innerHTML = `
+        <h3>${p.name}</h3>
+        <p>Rp${p.price.toLocaleString()}</p>
+        <button onclick='addToCart(${JSON.stringify(p)})'>Tambah ke Keranjang</button>
+      `;
+            list.appendChild(card);
+          });
+        });
+    </script>
+  </body>
+</html>

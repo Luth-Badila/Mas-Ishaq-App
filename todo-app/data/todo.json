@@ -1,9 +1,23 @@
 [
   {
-    "text": "tidur",
-    "time": "10:57",
+    "text": "bangun",
+    "time": "21:01",
     "name": "lutfi",
     "done": false,
     "id": 1
+  },
+  {
+    "text": "makan",
+    "time": "10:01",
+    "name": "lutfi",
+    "done": false,
+    "id": 2
+  },
+  {
+    "text": "mandi",
+    "time": "21:02",
+    "name": "lutfi",
+    "done": false,
+    "id": 3
   }
 ]

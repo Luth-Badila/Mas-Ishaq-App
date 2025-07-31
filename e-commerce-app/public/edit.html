@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/style.css" />
+    <title>Edit Produk</title>
+  </head>
+  <body>
+    <h1>Edit Produk</h1>
+    <form id="editForm" enctype="multipart/form-data">
+      <input type="hidden" name="id" id="id" />
+      <input name="name" id="name" placeholder="Nama" required /><br />
+      <input name="price" id="price" placeholder="Harga" type="number" required /><br />
+      <textarea name="description" id="description" placeholder="Deskripsi"></textarea><br />
+      <input name="image" type="file" /><br />
+      <button type="submit">Update</button>
+    </form>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+
+      fetch(`/api/products/${id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          document.getElementById("id").value = data.id;
+          document.getElementById("name").value = data.name;
+          document.getElementById("price").value = data.price;
+          document.getElementById("description").value = data.description;
+        });
+
+      document.getElementById("editForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const form = document.getElementById("editForm");
+        const formData = new FormData(form);
+
+        await fetch(`/api/products/${id}`, {
+          method: "POST",
+          body: formData,
+        });
+
+        window.location.href = "/";
+      });
+    </script>
+  </body>
+</html>

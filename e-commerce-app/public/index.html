@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../styles/style.css" />
+    <title>Produk</title>
+  </head>
+  <body>
+    <h1>Daftar Produk</h1>
+    <a href="./add.html">+ Tambah Produk</a>
+    <div id="product-list"></div>
+
+    <script>
+      fetch("/api/products")
+        .then((res) => res.json())
+        .then((data) => {
+          const container = document.getElementById("product-list");
+          data.forEach((p) => {
+            const el = document.createElement("div");
+            el.className = "produk";
+            el.innerHTML = `
+            <img src="/uploads/${p.image}" width="100">
+            <h3>${p.name}</h3>
+            <p>Rp${p.price}</p>
+            <p>${p.description}</p>
+            <button onclick="hapus(${p.id})">Hapus</button>
+            <button onclick="edit(${p.id})">Edit</button>
+          `;
+            container.appendChild(el);
+          });
+        });
+
+      function hapus(id) {
+        fetch("/api/products/" + id, { method: "DELETE" }).then(() => location.reload());
+      }
+      function edit(id) {
+        window.location.href = "/edit.html?id=" + id;
+      }
+    </script>
+  </body>
+</html>

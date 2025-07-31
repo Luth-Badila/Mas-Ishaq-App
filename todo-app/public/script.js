@@ -11,13 +11,35 @@ function loadTodos() {
       list.innerHTML = "";
       todos.forEach((todo) => {
         const li = document.createElement("li");
-        li.className = "todo-item" + (todo.done ? " done" : "");
+        li.className = "todo-item " + (todo.done ? "done" : "");
 
-        const span = document.createElement("span");
-        span.innerHTML = `
-          ${todo.done ? "✔️ " : ""}<strong>${todo.text}</strong><br>
-          <small>pukul: ${todo.time || "-"} | nama: ${todo.name || "-"}</small>
-        `;
+        // const section = document.createElement("span");
+        // section.innerHTML = `
+        //   <p class="span-id">${todo.id}</p>
+        //   ${todo.done ? "✔️ " : ""}<strong>${todo.text}</strong><br>
+        //   <small>pukul: ${todo.time || "-"} | nama: ${todo.name || "-"}</small>
+        // `;
+
+        const divList = document.createElement("div");
+        divList.className = "divList";
+
+        const idP = document.createElement("div");
+        idP.className = "span-id";
+        idP.textContent = todo.id;
+
+        const textStrong = document.createElement("strong");
+        textStrong.textContent = `${todo.done ? "✔️ " : ""}${todo.text}`;
+
+        const br = document.createElement("br");
+
+        const small = document.createElement("small");
+        small.textContent = `pukul: ${todo.time || "-"} | nama: ${todo.name || "-"}`;
+
+        // Gabungkan elemen ke dalam divList
+        divList.appendChild(idP);
+        divList.appendChild(textStrong);
+        divList.appendChild(br);
+        divList.appendChild(small);
 
         const div = document.createElement("div");
 
@@ -37,7 +59,7 @@ function loadTodos() {
         div.appendChild(editBtn);
         div.appendChild(delBtn);
 
-        li.appendChild(span);
+        li.appendChild(divList);
         li.appendChild(div);
         list.appendChild(li);
       });
@@ -80,46 +102,47 @@ function toggleTodo(id, done) {
   }).then(loadTodos);
 }
 
-function showEditForm(todo, li) {
-  li.innerHTML = "";
 
-  const input = document.createElement("input");
-  input.type = "text";
-  input.value = todo.text;
+// function showEditForm(todo, li) {
+//   li.innerHTML = "";
 
-  const timeEdit = document.createElement("input");
-  timeEdit.type = "time";
-  timeEdit.value = todo.time || "";
+//   const input = document.createElement("input");
+//   input.type = "text";
+//   input.value = todo.text;
 
-  const nameEdit = document.createElement("input");
-  nameEdit.type = "text";
-  nameEdit.placeholder = "Nama";
-  nameEdit.value = todo.name || "";
+//   const timeEdit = document.createElement("input");
+//   timeEdit.type = "time";
+//   timeEdit.value = todo.time || "";
 
-  const saveBtn = document.createElement("button");
-  saveBtn.textContent = "💾";
-  saveBtn.onclick = () => {
-    fetch(`/todos/${todo.id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        text: input.value,
-        time: timeEdit.value,
-        name: nameEdit.value,
-        done: todo.done,
-      }),
-    }).then(loadTodos);
-  };
+//   const nameEdit = document.createElement("input");
+//   nameEdit.type = "text";
+//   nameEdit.placeholder = "Nama";
+//   nameEdit.value = todo.name || "";
 
-  const cancelBtn = document.createElement("button");
-  cancelBtn.textContent = "❌";
-  cancelBtn.onclick = loadTodos;
+//   const saveBtn = document.createElement("button");
+//   saveBtn.textContent = "💾";
+//   saveBtn.onclick = () => {
+//     fetch(`/todos/${todo.id}`, {
+//       method: "PUT",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({
+//         text: input.value,
+//         time: timeEdit.value,
+//         name: nameEdit.value,
+//         done: todo.done,
+//       }),
+//     }).then(loadTodos);
+//   };
 
-  li.appendChild(input);
-  li.appendChild(timeEdit);
-  li.appendChild(nameEdit);
-  li.appendChild(saveBtn);
-  li.appendChild(cancelBtn);
-}
+//   const cancelBtn = document.createElement("button");
+//   cancelBtn.textContent = "❌";
+//   cancelBtn.onclick = loadTodos;
+
+//   li.appendChild(input);
+//   li.appendChild(timeEdit);
+//   li.appendChild(nameEdit);
+//   li.appendChild(saveBtn);
+//   li.appendChild(cancelBtn);
+// }
 
 loadTodos();

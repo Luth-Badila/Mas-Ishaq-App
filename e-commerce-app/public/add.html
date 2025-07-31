@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../styles/style.css" />
+  </head>
+  <body>
+    <h1>Tambah Produk</h1>
+    <form action="/api/products" method="POST" enctype="multipart/form-data">
+      <input name="name" placeholder="Nama" required /><br />
+      <input name="price" placeholder="Harga" type="number" required /><br />
+      <textarea name="description" placeholder="Deskripsi"></textarea><br />
+      <input name="image" type="file" required /><br />
+      <button type="submit">Simpan</button>
+    </form>
+  </body>
+</html>

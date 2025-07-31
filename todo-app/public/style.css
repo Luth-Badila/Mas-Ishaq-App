@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-  max-width: 500px;
+  max-width: 600px;
   margin: auto;
   background: white;
   padding: 20px;
@@ -33,7 +33,7 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 6px;
-  border-bottom: 1px solid #ddd;
+  border: 1px solid #000;
 }
 
 .todo-item.done span {
@@ -47,3 +47,8 @@ body {
   font-weight: bold;
 }
 
+.span-id {
+  border: 1px solid #000;
+  width: 10px;
+  padding: 2px 3px;
+}

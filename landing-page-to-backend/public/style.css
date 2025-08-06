@@ -1,0 +1,118 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Card styling */
+.card {
+  background: #f9f9f9;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-left: 6px solid #4CAF50;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.card:hover {
+  background: #f1f1f1;
+}
+
+/* Text and input styles */
+.card strong {
+  display: inline-block;
+  margin-bottom: 5px;
+  color: #222;
+}
+
+.card span {
+  color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 3px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #fff;
+}
+
+/* Button styles */
+button {
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:nth-child(1) {
+  background-color: #2196F3;
+  color: white;
+}
+
+button:nth-child(2) {
+  background-color: #f44336;
+  color: white;
+}
+
+button:nth-child(3) {
+  background-color: #4CAF50;
+  color: white;
+}
+
+button:nth-child(4) {
+  background-color: #9E9E9E;
+  color: white;
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 20px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  button {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+}

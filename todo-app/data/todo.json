@@ -1,7 +1,7 @@
 [
   {
-    "text": "bangun",
-    "time": "21:01",
+    "text": "bangun pagi",
+    "time": "07:00",
     "name": "lutfi",
     "done": false,
     "id": 1
@@ -19,5 +19,19 @@
     "name": "lutfi",
     "done": false,
     "id": 3
+  },
+  {
+    "text": "Kuliah",
+    "time": "11:27",
+    "name": "kevin",
+    "done": false,
+    "id": 4
+  },
+  {
+    "text": "Mengerjakan tugas kuliah",
+    "time": "11:31",
+    "name": "lutfi",
+    "done": false,
+    "id": 5
   }
 ]

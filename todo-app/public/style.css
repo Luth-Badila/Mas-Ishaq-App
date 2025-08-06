@@ -2,12 +2,19 @@ body {
   font-family: Arial, sans-serif;
   background: #f7f7f7;
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .container {
-  max-width: 600px;
-  margin: auto;
+  width: 800px;
   background: white;
   padding: 20px;
   border-radius: 8px;

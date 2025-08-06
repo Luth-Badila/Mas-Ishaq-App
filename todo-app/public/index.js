@@ -1,7 +1,3 @@
-const form = document.getElementById("todo-form");
-const input = document.getElementById("todo-input");
-const timeInput = document.getElementById("time-input");
-const nameInput = document.getElementById("name-input");
 const list = document.getElementById("todo-list");
 
 function loadTodos() {
@@ -66,30 +62,6 @@ function loadTodos() {
     });
 }
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const text = input.value.trim();
-  const timeText = timeInput.value.trim();
-  const nameText = nameInput.value.trim();
-  if (!text || !timeText || !nameText) return;
-
-  fetch("/todos", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      text,
-      time: timeText,
-      name: nameText,
-      done: false,
-    }),
-  }).then(() => {
-    input.value = "";
-    timeInput.value = "";
-    nameInput.value = "";
-    loadTodos();
-  });
-});
-
 function deleteTodo(id) {
   fetch(`/todos/${id}`, { method: "DELETE" }).then(loadTodos);
 }
@@ -102,47 +74,47 @@ function toggleTodo(id, done) {
   }).then(loadTodos);
 }
 
+// Untuk edit data
+function showEditForm(todo, li) {
+  li.innerHTML = "";
 
-// function showEditForm(todo, li) {
-//   li.innerHTML = "";
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = todo.text;
 
-//   const input = document.createElement("input");
-//   input.type = "text";
-//   input.value = todo.text;
+  const timeEdit = document.createElement("input");
+  timeEdit.type = "time";
+  timeEdit.value = todo.time || "";
 
-//   const timeEdit = document.createElement("input");
-//   timeEdit.type = "time";
-//   timeEdit.value = todo.time || "";
+  const nameEdit = document.createElement("input");
+  nameEdit.type = "text";
+  nameEdit.placeholder = "Nama";
+  nameEdit.value = todo.name || "";
 
-//   const nameEdit = document.createElement("input");
-//   nameEdit.type = "text";
-//   nameEdit.placeholder = "Nama";
-//   nameEdit.value = todo.name || "";
+  const saveBtn = document.createElement("button");
+  saveBtn.textContent = "💾";
+  saveBtn.onclick = () => {
+    fetch(`/todos/${todo.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        text: input.value,
+        time: timeEdit.value,
+        name: nameEdit.value,
+        done: todo.done,
+      }),
+    }).then(loadTodos);
+  };
 
-//   const saveBtn = document.createElement("button");
-//   saveBtn.textContent = "💾";
-//   saveBtn.onclick = () => {
-//     fetch(`/todos/${todo.id}`, {
-//       method: "PUT",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({
-//         text: input.value,
-//         time: timeEdit.value,
-//         name: nameEdit.value,
-//         done: todo.done,
-//       }),
-//     }).then(loadTodos);
-//   };
+  const cancelBtn = document.createElement("button");
+  cancelBtn.textContent = "❌";
+  cancelBtn.onclick = loadTodos;
 
-//   const cancelBtn = document.createElement("button");
-//   cancelBtn.textContent = "❌";
-//   cancelBtn.onclick = loadTodos;
-
-//   li.appendChild(input);
-//   li.appendChild(timeEdit);
-//   li.appendChild(nameEdit);
-//   li.appendChild(saveBtn);
-//   li.appendChild(cancelBtn);
-// }
+  li.appendChild(input);
+  li.appendChild(timeEdit);
+  li.appendChild(nameEdit);
+  li.appendChild(saveBtn);
+  li.appendChild(cancelBtn);
+}
 
 loadTodos();

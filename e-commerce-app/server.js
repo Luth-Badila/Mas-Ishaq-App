@@ -38,15 +38,35 @@ const server = http.createServer((req, res) => {
   const method = req.method;
 
   // Static file handling
-  if (url === "/" || url === "/public/index.html") {
-    serveFile("public/index.html", "text/html", res);
-  } else if (url === "/add.html" || url === "/public/add.html") {
-    serveFile("public/add.html", "text/html", res);
-  } else if (url === "/edit.html" || url === "/public/edit.html") {
-    serveFile("public/edit.html", "text/html", res);
-  } else if (url === "../public/style.css") {
-    serveFile("public/style.css", "text/css", res);
-  } else if (url.startsWith("/uploads/")) {
+  if (url.startsWith("/public/")) {
+    const filePath = path.join(__dirname, url);
+    const ext = path.extname(filePath);
+    const contentType =
+      {
+        ".html": "text/html",
+        ".css": "text/css",
+        ".js": "text/javascript",
+      }[ext] || "text/plain";
+
+    fs.readFile(filePath, (err, content) => {
+      if (err) {
+        res.writeHead(404);
+        res.end("File not found");
+      } else {
+        res.writeHead(200, { "Content-Type": contentType });
+        res.end(content);
+      }
+    });
+  }
+  //   serveFile("public/index.html", "text/html", res);
+  // } else if (url === "/add.html" || url === "/public/add.html") {
+  //   serveFile("public/add.html", "text/html", res);
+  // } else if (url === "/edit.html" || url === "/public/edit.html") {
+  //   serveFile("public/edit.html", "text/html", res);
+  // } else if (url === "../public/style.css") {
+  //   serveFile("public/style.css", "text/css", res);
+  // }
+  else if (url.startsWith("/uploads/")) {
     const ext = path.extname(url);
     const contentType =
       {
@@ -70,7 +90,7 @@ const server = http.createServer((req, res) => {
       const image = files.image?.newFilename;
 
       db.query("INSERT INTO products (name, price, description, image) VALUES (?, ?, ?, ?)", [name, price, description, image], () => {
-        res.writeHead(302, { Location: "/" });
+        res.writeHead(302, { Location: "/public/index.html" });
         res.end();
       });
     });

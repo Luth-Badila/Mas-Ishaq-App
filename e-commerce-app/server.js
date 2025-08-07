@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 import formidable from "formidable";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const PORT = 3000;
+const PORT = 3001;
 
 function serveFile(filePath, contentType, res) {
   const fullPath = path.join(__dirname, filePath);

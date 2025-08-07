@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Order Landing Page</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(to bottom right, #fffbe7, #ffe9d2);
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+
+      header {
+        background-color: #ff7f50;
+        color: white;
+        padding: 30px 20px;
+        text-align: center;
+        background-image: url("https://www.transparenttextures.com/patterns/food.png");
+        background-size: cover;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 36px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 30px auto;
+        background-color: #fff;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        margin-top: 0;
+        color: #ff7f50;
+      }
+
+      .menu-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+      }
+
+      .menu-item img {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+        object-fit: cover;
+        margin-right: 15px;
+      }
+
+      .menu-info {
+        flex: 1;
+      }
+
+      .menu-info label {
+        display: block;
+        font-weight: bold;
+      }
+
+      .menu-info small {
+        color: #777;
+      }
+
+      .menu-item input[type="number"] {
+        width: 60px;
+        padding: 5px;
+        margin-left: 10px;
+        display: none;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .form-section {
+        margin-top: 30px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: bold;
+      }
+
+      input[type="date"],
+      input[type="time"] {
+        padding: 8px;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
+
+      .radio-group {
+        display: flex;
+        gap: 20px;
+      }
+
+      .radio-group label {
+        font-weight: normal;
+      }
+
+      button {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        background-color: #28a745;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #218838;
+      }
+
+      @media screen and (max-width: 600px) {
+        .menu-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .menu-item img {
+          margin-bottom: 10px;
+        }
+      }
+    </style>
+    <script>
+      function toggleQty(checkbox, id) {
+        const input = document.getElementById("qty-" + id);
+        if (checkbox.checked) {
+          input.style.display = "inline-block";
+          input.focus();
+        } else {
+          input.style.display = "none";
+          input.value = "";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>🍽️ Pesan Makanan Lezatmu!</h1>
+      <p>Mudah, cepat, dan nikmat.</p>
+    </header>
+
+    <div class="container">
+      <h2>Menu Hari Ini</h2>
+
+      <!-- FORM MULAI -->
+      <form action="#" method="POST">
+        <!-- Makanan 1 -->
+        <div class="menu-item">
+          <img src="https://cdn.pixabay.com/photo/2016/03/05/19/02/abstract-1238247_960_720.jpg" alt="Nasi Goreng" />
+          <div class="menu-info">
+            <label> <input type="checkbox" name="menu[]" value="Nasi Goreng" onchange="toggleQty(this, 1)" /> Nasi Goreng </label>
+            <small>Rp20.000</small>
+          </div>
+          <input type="number" id="qty-1" name="qty[Nasi Goreng]" min="1" placeholder="Jumlah" />
+        </div>
+
+        <!-- Makanan 2 -->
+        <div class="menu-item">
+          <img src="https://cdn.pixabay.com/photo/2017/05/07/08/56/food-2295811_960_720.jpg" alt="Mie Ayam" />
+          <div class="menu-info">
+            <label> <input type="checkbox" name="menu[]" value="Mie Ayam" onchange="toggleQty(this, 2)" /> Mie Ayam </label>
+            <small>Rp18.000</small>
+          </div>
+          <input type="number" id="qty-2" name="qty[Mie Ayam]" min="1" placeholder="Jumlah" />
+        </div>
+
+        <!-- Makanan 3 -->
+        <div class="menu-item">
+          <img src="https://cdn.pixabay.com/photo/2018/06/18/16/05/satay-3486320_960_720.jpg" alt="Sate Ayam" />
+          <div class="menu-info">
+            <label> <input type="checkbox" name="menu[]" value="Sate Ayam" onchange="toggleQty(this, 3)" /> Sate Ayam </label>
+            <small>Rp25.000</small>
+          </div>
+          <input type="number" id="qty-3" name="qty[Sate Ayam]" min="1" placeholder="Jumlah" />
+        </div>
+
+        <!-- Tanggal & Waktu -->
+        <div class="form-section">
+          <div class="form-group">
+            <label for="tanggal">Tanggal Pengiriman</label>
+            <input type="date" id="tanggal" name="tanggal" required />
+          </div>
+
+          <div class="form-group">
+            <label for="waktu">Waktu Pengambilan</label>
+            <input type="time" id="waktu" name="waktu" required />
+          </div>
+        </div>
+
+        <!-- Metode -->
+        <div class="form-section">
+          <label>Metode Pengambilan</label>
+          <div class="radio-group">
+            <label><input type="radio" name="metode" value="diantar" required /> Diantar</label>
+            <label><input type="radio" name="metode" value="diambil" /> Diambil</label>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-section">
+          <button type="submit">Pesan Sekarang</button>
+        </div>
+      </form>
+      <!-- FORM SELESAI -->
+    </div>
+  </body>
+</html>
